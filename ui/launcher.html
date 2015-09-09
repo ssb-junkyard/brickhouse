@@ -28,7 +28,7 @@ function openpath (e) {
   return false
 }
 function open (url) {
-  env.open(url, function (err) {
+  ssb.open(url, function (err) {
     if (err) {
       console.error(err)
       alert(err.message)
