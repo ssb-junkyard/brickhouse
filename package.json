@@ -2,9 +2,9 @@
   "name": "brickhouse",
   "version": "0.0.0",
   "description": "an html5, p2p desktop apps platform",
-  "main": "app/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron ./index.js",
     "clean": "rm -Rf ./dist",
     "clean:osx": "rm -Rf ./dist/osx",
     "clean:win": "rm -Rf ./dist/win",
