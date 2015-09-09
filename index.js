@@ -12,6 +12,14 @@ app.on('ready', function () {
   http.createServer(require('./lib/http-server')({ port: 7777, servefiles: false })).listen(7777)
   http.createServer(require('./lib/http-server')({ port: 7778, servefiles: true  })).listen(7778)
 
+  // setup ssb protocol
+  var protocol = require('protocol')
+  protocol.registerProtocol('ssb', function (req, cb) {
+    console.log('fetching', req)
+    var path = req.url.slice(4) // skip the 'ssb:'
+    return new protocol.RequestHttpJob({ url: 'http://localhost:7777/'+path })
+  })
+
   // open launcher window
   windows.openLauncher()
   // mainWindow.openDevTools()
