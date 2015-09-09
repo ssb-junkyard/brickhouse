@@ -1,3 +1,20 @@
 body {
   text-align: center;
 }
+hr {
+  margin: 30px auto 25px;
+  width: 20%;
+  border: 0;
+  border: 1px solid #ccc;
+}
+#bookmarks {
+  font-family: sans-serif;
+}
+#bookmarks small {
+  color: gray;
+}
+.remove {
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+}

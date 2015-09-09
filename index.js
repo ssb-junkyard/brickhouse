@@ -5,12 +5,14 @@ var http = require('http')
 
 var menu = require('./lib/menu')
 var windows = require('./lib/windows')
+var bookmarks = require('./lib/bookmarks')
 
 app.on('ready', function () {
   // setup servers
-  require('./lib/sbot').setup()
+  var sbot = require('./lib/sbot').setup()
   http.createServer(require('./lib/http-server')({ port: 7777, servefiles: false })).listen(7777)
   http.createServer(require('./lib/http-server')({ port: 7778, servefiles: true  })).listen(7778)
+  bookmarks.load(path.join(require('./lib/sbot').getConfig().path, 'bookmarks.json'))
 
   // setup ssb protocol
   var protocol = require('protocol')
