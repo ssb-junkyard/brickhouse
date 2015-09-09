@@ -9,8 +9,8 @@ var windows = require('./lib/windows')
 app.on('ready', function () {
   // setup servers
   require('./lib/sbot').setup()
-  http.createServer(require('./lib/blobs-http-server')()).listen(7777)
-  http.createServer(require('./lib/files-http-server')()).listen(7778)
+  http.createServer(require('./lib/http-server')({ port: 7777, servefiles: false })).listen(7777)
+  http.createServer(require('./lib/http-server')({ port: 7778, servefiles: true  })).listen(7778)
 
   // open launcher window
   windows.openLauncher()
