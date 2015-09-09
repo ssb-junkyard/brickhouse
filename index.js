@@ -26,7 +26,8 @@ app.on('ready', function () {
   // dynamically update main menu on osx
   if (process.platform == 'darwin') {
     app.on('browser-window-focus', function (e, window) {
-      Menu.setApplicationMenu(window.menu)
+      if (window.menu)
+        Menu.setApplicationMenu(window.menu)
     })
   }
 });
