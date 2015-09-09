@@ -15,7 +15,6 @@ app.on('ready', function () {
   // setup ssb protocol
   var protocol = require('protocol')
   protocol.registerProtocol('ssb', function (req, cb) {
-    console.log('fetching', req)
     var path = req.url.slice(4) // skip the 'ssb:'
     return new protocol.RequestHttpJob({ url: 'http://localhost:7777/'+path })
   })
