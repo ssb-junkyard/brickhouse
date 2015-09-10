@@ -25,9 +25,11 @@
     "electron-prebuilt": "^0.28.2"
   },
   "dependencies": {
+    "mime-types": "^2.1.6",
     "multiblob": "^1.5.0",
     "multicb": "^1.1.0",
     "muxrpc": "^6.1.1",
+    "pull-identify-filetype": "^1.0.0",
     "pull-ipc": "0.0.1",
     "pull-pushable": "^1.1.4",
     "pull-stream": "^2.27.0",
