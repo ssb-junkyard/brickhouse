@@ -22,6 +22,7 @@ app.on('ready', function () {
   })
 
   // open launcher window
+  windows.openNavbar()
   windows.openLauncher()
   // mainWindow.openDevTools()
 

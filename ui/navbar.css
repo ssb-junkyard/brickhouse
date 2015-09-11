@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+}
+
+#tabs {
+  display: flex;
+  background: #ccc;
+  font-size: 15px;
+  font-family: sans-serif;
+  -webkit-app-region: drag;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+#tabs > div {
+  -webkit-app-region: no-drag;
+  flex: 1;
+  display: flex;
+  background: #ccc;
+  color: #777;
+  border-right: 1px solid #bbb;
+  cursor: default;
+  white-space: nowrap;
+}
+#tabs > div.active {
+  -webkit-app-region: drag;
+  background: #e5e5e5;
+  color: #555;
+}
+#tabs > div > span {
+  flex: 1;
+  padding: 6px 0 4px 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#tabs > div > span > i {
+  margin-left: 5px;
+}
+#tabs > div > a {
+  -webkit-app-region: no-drag;
+  display: inline-block;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: right;
+}
+#tabs > div > a:hover {
+  background: rgb(245, 119, 119);
+  color: #fff;
+}
+#tabs > a {
+  -webkit-app-region: no-drag;
+  display: inline-block;
+  color: #888;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 6px 4px;
+}
+#tabs > a.newtab {
+  padding: 6px 12px 7px 10px;
+  margin: 0;
+}
+#tabs > a.newtab:hover {
+  color: #fff;
+  background: rgb(99, 190, 229);
+}

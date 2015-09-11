@@ -31,6 +31,7 @@
     "muxrpc": "^6.1.1",
     "pull-identify-filetype": "^1.0.0",
     "pull-ipc": "0.0.1",
+    "pull-notify": "0.0.0",
     "pull-pushable": "^1.1.4",
     "pull-stream": "^2.27.0",
     "scuttlebot": "~7.0.2",
