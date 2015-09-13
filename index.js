@@ -7,30 +7,38 @@ var config = require('./config')
 var MultiBlob = require('multiblob')
 var Level = require('level')
 var Sublevel = require('level-sublevel')
+var httpStack = require('./lib/http-server')
 
 var menu = require('./lib/menu')
 var windows = require('./lib/windows')
 var bookmarks = require('./lib/bookmarks')
 
-var blobs = MultiBlobs({
-  dir: path.join(config.path, 'blobs'), alg: 'sha256'
+var blobs = MultiBlob({
+  dir: path.join(config.path, 'blobs'), hash: 'sha256'
 })
 
-var db = Sublevel(Level(path.join(config.path, 'db')))
+var db = Sublevel(Level(path.join(config.path, 'db'), {valueEncoding: 'json'}))
 
 var appDB = db.sublevel('apps')
 
-var n = 3
+var n = 4
 
 http.createServer(httpStack.BlobStack(blobs)).listen(7777, next)
 http.createServer(httpStack.FileStack(blobs)).listen(7778, next)
-
 app.on('ready', next)
 
-var httpStack = require('./lib/http-server')
+//copy default apps into the database. (simpler from running outside apps)
+//especially since we are bundling the apps.
+//---there is probably a better way to do this---
+require('./lib/initialize')(blobs, db, next)
 
-function next () {
-  if(!--n) return
+function next (err) {
+  if(err && err.stack) {
+    console.error('error getting app ready')
+    console.error(err.stack)
+    return app.quit()
+  }
+  if(--n) return
 
   // setup servers
 //  var sbot = require('./lib/sbot').setup()
@@ -39,23 +47,24 @@ function next () {
 
   // setup ssb protocol
   var protocol = require('protocol')
-  protocol.registerProtocol('blob', function (req, cb) {
-    var path = req.url.slice(4) // skip the 'ssb:'
-    return new protocol.RequestHttpJob({ url: 'http://localhost:7777/'+path })
+  protocol.registerProtocol('brick', function (req, cb) {
+    var path = req.url.slice(6) // skip the 'ssb:'
+    var url = 'http://localhost:7777/'+path
+    return new protocol.RequestHttpJob({ url: url })
   })
 
   appDB.get('home', function (err, data) {
     if(err) {
       //we have to bail out here, because we can't do anything
       //if the main can't load.
+      console.error('error loading home app')
       console.error(err.stack)
       return app.quit()
     }
 
-    //how to initialize 
-    windows.open('blob:'+
-      path.join(__dirname, 'defaults', 'build', 'home.js')
-    )
+    //how to initialize
+    console.log(data)
+    windows.open('brick:'+data.hash + '?bundle=1')
   })
 
   // open launcher window
