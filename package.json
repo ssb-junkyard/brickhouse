@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "electron ./index.js",
+    "prepublish": "./init.sh",
     "clean": "rm -Rf ./dist",
     "clean:osx": "rm -Rf ./dist/osx",
     "clean:win": "rm -Rf ./dist/win",
-    "build": "npm run clean && npm run build:osx && npm run build:win",
+    "build": "npm run clean && ./init.sh && npm run build:osx && npm run build:win",
     "build:icon": "./scripts/make-icns.sh assets/icon1024.png assets/osx/scuttlebot.icns",
     "build:osx": "electron-packager ./ Scuttlebot --out=dist/osx --platform=darwin --arch=x64 --ignore=node_modules/electron* --version=0.28.3 --icon=assets/osx/scuttlebot.icns",
     "build:win": "electron-packager ./ Scuttlebot --out=dist/win --platform=win32 --arch=ia32 --ignore=node_modules/electron* --version=0.28.3 --icon=assets/win/scuttlebot.ico",
