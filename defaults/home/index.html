@@ -1,4 +1,11 @@
-#! /usr/bin/env node
+<!DOCTYPE html>
+<html>
+<head>
+<title>---</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta charset=utf-8></head>
+<body></body>
+<script language=javascript>
 (function prelude(content, deps, entry) {
   var cache = {}
 
@@ -22,12 +29,16 @@
 
   return load(entry)
 })({
-"yRh3lsZKjW7bVSSKqEkPAhEbftwMqLEP+xMhX6/LvDI=":
+"SvwuF5g5XfB8johyrZPZeay22NuVdL7O8m1hGbPzD/M=":
 function (require, module, exports, __dirname, __filename) {
 
-var h = require('hyperscript')
+//var h = require('hyperscript')
 
-document.body.appendChild(h('h1', 'it works'))
+var h1 = document.createElement('h1')
+
+h1.textContent = 'it works'
+
+document.body.appendChild(h1) //h('h1', 'it works'))
 
 
 
@@ -37,8 +48,10 @@ document.body.appendChild(h('h1', 'it works'))
 ,
 {
   "index.js": [
-    "yRh3lsZKjW7bVSSKqEkPAhEbftwMqLEP+xMhX6/LvDI=",
+    "SvwuF5g5XfB8johyrZPZeay22NuVdL7O8m1hGbPzD/M=",
     {}
   ]
 },
 "index.js")
+</script>
+</html>
