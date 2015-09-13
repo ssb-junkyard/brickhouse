@@ -3,20 +3,22 @@
 
   function load (file) {
     var d = deps[file]
-    if(cache[file]) return cache[d]
+    if(cache[file]) return cache[file]
     if(!d) return require(file)
     var fn = content[d[0]] //the actual module
     var module = {exports: {}, parent: file !== entry}
-    return cache[file] = fn(
+    fn(
       function (m) {
-        if(!deps[file][m]) return require(m)
-        else               return load (deps[file][m])
+        //console.error('require', m, d[1][m])
+        if(!d[1][m]) return require(m)
+        else         return load (d[1][m])
       },
       module,
       module.exports,
       file.substring(file.lastIndexOf('/')),
       file
     )
+    return cache[file] = module.exports
   }
 
   return load(entry)
@@ -170,14 +172,6 @@ function isArray (arr) {
 }
 
 },
-"4xEqfmAjwE66fwehZdkVt40yn/v+eC75XI2lLT1wW5s=":
-function (require, module, exports, __dirname, __filename) {
-
-var h = require('hyperscript')
-
-document.body.appendChild(h('h1', 'it works'))
-
-},
 "8zMGV0j0ID5bUIeT7r+MYLl5+yL8YL4u69uOLDWc1Bg=":
 function (require, module, exports, __dirname, __filename) {
 
@@ -292,6 +286,22 @@ function filter (arr, fn) {
 function isTruthy(value) {
     return !!value
 }
+
+},
+"njPVWP6KlLu/yEvCtar5jUrL1jZ5ntcII2376XKnf7o=":
+function (require, module, exports, __dirname, __filename) {
+
+var h = require('hyperscript')
+
+document.body.appendChild(h('h1', 'home app'))
+document.body.appendChild(h('p',
+    'this is just the simplest possible thing',
+    'to test that the supporting stuff all works.',
+    'this is the app which would be responsible for the first app.',
+    'and would do stuff like manage the other apps, or window management stuff'
+  )
+)
+
 
 },
 "rvU3L3UyAELTHd/kyDxMcm2nWGNW9EP3603AbvvAaZI=":
@@ -708,7 +718,7 @@ module.exports = (function split(undef) {
 ,
 {
   "index.js": [
-    "4xEqfmAjwE66fwehZdkVt40yn/v+eC75XI2lLT1wW5s=",
+    "njPVWP6KlLu/yEvCtar5jUrL1jZ5ntcII2376XKnf7o=",
     {
       "hyperscript": "node_modules/hyperscript/index.js"
     }
